@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DashixC2 - Status</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0d2e 50%, #000 100%); 
+            font-family: 'Inter', sans-serif;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; overflow: hidden; position: relative;
+            color: #fff;
+        }
+        canvas { position: fixed; top: 0; left: 0; z-index: -1; }
+
+        /* MUSIC BUTTON - MINIMAL */
+        .music-button {
+            position: fixed; bottom: 20px; left: 20px; z-index: 1001;
+            background: rgba(0,0,0,0.5); border: 1px solid rgba(107,72,255,0.3);
+            border-radius: 50px; padding: 8px 16px; cursor: pointer;
+            color: #6b48ff; font-size: 0.9em; text-transform: uppercase;
+            letter-spacing: 1px; font-weight: 400;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1.5s ease-out 0.8s forwards;
+            transition: all 0.3s ease;
+        }
+        .music-button:hover {
+            background: rgba(107,72,255,0.1); border-color: #6b48ff;
+            box-shadow: 0 0 20px rgba(107,72,255,0.3);
+        }
+
+        /* MAIN BOX - GLASSMORPHISM */
+        .main-box {
+            width: 90%; max-width: 900px; padding: 40px 20px;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(107,72,255,0.2);
+            border-radius: 24px; text-align: center;
+            backdrop-filter: blur(20px);
+            animation: boxFloat 6s ease-in-out infinite;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            opacity: 0;
+            animation: fadeIn 1.5s ease-out 1.2s forwards;
+            overflow-y: auto;
+            scrollbar-width: thin; scrollbar-color: #6b48ff rgba(0,0,0,0.5);
+        }
+        .main-box::-webkit-scrollbar { width: 8px; }
+        .main-box::-webkit-scrollbar-track { background: rgba(0,0,0,0.5); border-radius: 4px; }
+        .main-box::-webkit-scrollbar-thumb { background: linear-gradient(#6b48ff, #9b59b6); border-radius: 4px; box-shadow: 0 0 10px rgba(107,72,255,0.5); }
+        .main-box::-webkit-scrollbar-thumb:hover { background: #6b48ff; box-shadow: 0 0 15px #6b48ff; }
+
+        /* TITLE - BOLD, MODERN */
+        .title { 
+            font-size: 4.5em; margin-bottom: 10px; 
+            background: linear-gradient(45deg, #6b48ff, #9b59b6, #fff);
+            background-size: 300% 300%;
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+            text-transform: uppercase; letter-spacing: 2px;
+            font-weight: 700;
+            animation: titleShift 3s ease-in-out infinite;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-out 1.4s forwards;
+        }
+
+        /* SUBTEXT - CLEAN */
+        .subtitle { 
+            font-size: 1.3em; color: rgba(255,255,255,0.8); margin-bottom: 30px; 
+            font-weight: 300; text-transform: uppercase; letter-spacing: 2px;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-out 1.6s forwards;
+        }
+
+        /* NAVBAR - SLIM, HORIZONTAL, CENTERED */
+        .navbar {
+            background: rgba(0,0,0,0.3); border: 1px solid rgba(107,72,255,0.2);
+            border-radius: 50px; padding: 12px 24px; margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            animation: fadeIn 1.5s ease-out 1.8s forwards;
+            width: 100%;
+            display: flex; justify-content: center;
+        }
+        .nav-links {
+            display: flex; justify-content: center; align-items: center; gap: 20px; list-style: none;
+            flex-wrap: wrap; width: 100%; max-width: 800px;
+        }
+        .nav-links li {
+            flex: 0 1 auto;
+        }
+        .nav-links li a {
+            display: block; padding: 8px 20px; color: rgba(255,255,255,0.8);
+            text-decoration: none; text-transform: uppercase; font-weight: 400;
+            letter-spacing: 1px; font-size: 0.95em;
+            border-radius: 25px; transition: all 0.3s ease;
+            opacity: 0;
+            text-align: center;
+        }
+        .nav-links li:nth-child(1) a { animation: fadeIn 1.5s ease-out 2s forwards; }
+        .nav-links li:nth-child(2) a { animation: fadeIn 1.5s ease-out 2.1s forwards; }
+        .nav-links li:nth-child(3) a { animation: fadeIn 1.5s ease-out 2.2s forwards; }
+        .nav-links li:nth-child(4) a { animation: fadeIn 1.5s ease-out 2.3s forwards; }
+        .nav-links li:nth-child(5) a { animation: fadeIn 1.5s ease-out 2.4s forwards; }
+        .nav-links li:nth-child(6) a { animation: fadeIn 1.5s ease-out 2.5s forwards; }
+        .nav-links li:nth-child(7) a { animation: fadeIn 1.5s ease-out 2.6s forwards; }
+        .nav-links li:nth-child(8) a { animation: fadeIn 1.5s ease-out 2.7s forwards; }
+        .nav-links li a:hover {
+            background: rgba(107,72,255,0.2); color: #6b48ff;
+            transform: translateY(-1px);
+        }
+
+        /* STATUS SECTION - STAGGERED FADE */
+        .status-section {
+            margin-top: 20px; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-out 1.8s forwards;
+        }
+        .status-item {
+            background: rgba(0,0,0,0.5); border: 1px solid rgba(107,72,255,0.3);
+            border-radius: 16px; padding: 20px; margin-bottom: 20px;
+            transition: all 0.3s ease; text-align: left;
+            opacity: 0;
+        }
+        .status-item:nth-child(1) { animation: fadeIn 1.5s ease-out 2s forwards; }
+        .status-item:hover {
+            background: rgba(107,72,255,0.2); border-color: #6b48ff;
+            transform: translateY(-5px); box-shadow: 0 8px 24px rgba(107,72,255,0.3);
+        }
+        .status-title {
+            font-size: 1.2em; color: #6b48ff; margin-bottom: 10px;
+            text-transform: uppercase; letter-spacing: 1px; font-weight: 600;
+        }
+        .status-text {
+            font-size: 1em; color: rgba(255,255,255,0.8); line-height: 1.4;
+            letter-spacing: 0.5px;
+        }
+
+        /* ANIMATIONS */
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes boxFloat { 
+            0%, 100% { transform: translateY(0px); } 
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes titleShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        @keyframes fadeIn { 
+            to { opacity: 1; } 
+        }
+
+        /* LOADER */
+        #loader { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: #000; display: flex; justify-content: center; align-items: center; 
+            z-index: 1000;
+        }
+        .loader-spinner { 
+            width: 40px; height: 40px; border: 2px solid rgba(107,72,255,0.3); 
+            border-top: 2px solid #6b48ff; border-radius: 50%; 
+            animation: spin 1s linear infinite; 
+        }
+
+        /* TAWK RIGHT */
+        #tawk_68f1ada3c65081194dc35ac8 { right: 10px !important; bottom: 10px !important; left: auto !important; }
+        .tawk-widget--button { right: 10px !important; bottom: 10px !important; left: auto !important; }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            .main-box { width: 95%; padding: 30px 15px; }
+            .title { font-size: 3em; letter-spacing: 1px; }
+            .subtitle { font-size: 1.1em; margin-bottom: 20px; }
+            .navbar { padding: 10px 16px; }
+            .nav-links { gap: 12px; }
+            .nav-links li a { padding: 6px 12px; font-size: 0.85em; }
+            .status-section { width: 100%; }
+            .status-item { padding: 15px; }
+            .status-title { font-size: 1.1em; }
+            .status-text { font-size: 0.9em; }
+        }
+    </style>
+</head>
+<body>
+    <div id="loader"><div class="loader-spinner"></div></div>
+    <canvas id="particleCanvas"></canvas>
+    <canvas id="snowCanvas"></canvas>
+
+    <button class="music-button" id="musicButton">PLAY</button>
+
+    <div class="main-box">
+        <h1 class="title">DASHIXC2</h1>
+        <p class="subtitle">STATUS</p>
+        
+        <!-- NAVBAR -->
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="test.html">Test Account</a></li>
+                <li><a href="methods.html">Methods</a></li>
+                <li><a href="purchase.html">Purchase</a></li>
+                <li><a href="status.html">Status</a></li>
+                <li><a href="videos1.html">Proof Videos</a></li>
+                <li><a href="gallery1.html">Proof Gallery</a></li>
+                <li><a href="terms.html">Terms</a></li>
+            </ul>
+        </nav>
+
+        <!-- STATUS SECTION -->
+        <div class="status-section">
+            <div class="status-item">
+                <div class="status-title">Server Status</div>
+                <div class="status-text" id="serverStatus">Checking...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AUDIO ELEMENT -->
+    <audio id="backgroundMusic" loop>
+        <source src="/silk.mp3" type="audio/mpeg">
+        <source src="/background_music.ogg" type="audio/ogg">
+    </audio>
+
+    <!-- TAWK.TO -->
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true; s1.src='https://embed.tawk.to/68f1ada3c65081194dc35ac8/1j7o0shn6';
+    s1.charset='UTF-8'; s1.setAttribute('crossorigin','*'); s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+
+    <script>
+        // MUSIC CONTROL
+        const audio = document.getElementById('backgroundMusic');
+        const musicButton = document.getElementById('musicButton');
+        let isPlaying = false;
+
+        musicButton.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                musicButton.textContent = 'PLAY';
+            } else {
+                audio.play().catch(() => {});
+                musicButton.textContent = 'PAUSE';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // AUTO-PLAY MUSIC AFTER LOADER
+        setTimeout(() => {
+            audio.play().catch(() => {});
+            musicButton.textContent = 'PAUSE';
+            isPlaying = true;
+        }, 1200);
+
+        // LOADER
+        setTimeout(() => document.getElementById('loader').style.display = 'none', 1200);
+
+        // PARTICLES (SUBTLE FLOATING DOTS)
+        const c = document.getElementById('particleCanvas');
+        const ctx = c.getContext('2d');
+        c.width = window.innerWidth; c.height = window.innerHeight;
+        const p = []; for(let i=0; i<50; i++) p.push({x:Math.random()*c.width, y:Math.random()*c.height, s:Math.random()*1.5 + 0.5, vx:Math.random()*0.5-0.25, vy:Math.random()*0.5-0.25});
+        function animate() {
+            ctx.clearRect(0,0,c.width,c.height);
+            p.forEach(pt => {
+                ctx.fillStyle = 'rgba(107,72,255,0.2)'; ctx.beginPath();
+                ctx.arc(pt.x += pt.vx, pt.y += pt.vy, pt.s, 0, Math.PI*2); ctx.fill();
+                if (pt.x < 0 || pt.x > c.width) pt.vx *= -1;
+                if (pt.y < 0 || pt.y > c.height) pt.vy *= -1;
+            });
+            requestAnimationFrame(animate);
+        } animate();
+
+        // SNOW (LIGHTER, SLOWER)
+        const s = document.getElementById('snowCanvas');
+        const sc = s.getContext('2d');
+        s.width = window.innerWidth; s.height = window.innerHeight;
+        const flakes = []; for(let i=0; i<30; i++) flakes.push({x:Math.random()*s.width, y:-10, s:Math.random()*1.5 + 0.5, vy:Math.random()*0.3 + 0.2});
+        function snow() {
+            sc.clearRect(0,0,s.width,s.height);
+            flakes.forEach(f => {
+                sc.fillStyle = 'rgba(107,72,255,0.1)'; sc.beginPath();
+                sc.arc(f.x += Math.random()*0.5 - 0.25, f.y += f.vy, f.s, 0, Math.PI*2); sc.fill();
+                if(f.y > s.height) { f.y = -10; f.x = Math.random()*s.width; }
+            });
+            requestAnimationFrame(snow);
+        } snow();
+
+        // STATUS FETCH FROM status.php
+        async function fetchStatus() {
+            try {
+                const response = await fetch('status.php');
+                const data = await response.json();
+                const statusElement = document.getElementById('serverStatus');
+                statusElement.textContent = `${data.message} (Status: ${data.status.toUpperCase()}, Time: ${data.time}ms)`;
+            } catch (error) {
+                document.getElementById('serverStatus').textContent = 'Error fetching status';
+            }
+        }
+        fetchStatus();
+        setInterval(fetchStatus, 60000);
+
+        // RESIZE CANVAS
+        window.addEventListener('resize', () => {
+            c.width = window.innerWidth; c.height = window.innerHeight;
+            s.width = window.innerWidth; s.height = window.innerHeight;
+        });
+
+        // CLICK SOUND
+        document.addEventListener('click', () => {
+            new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=').play().catch(()=>{});
+        });
+    </script>
+</body>
+</html>
