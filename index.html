@@ -175,12 +175,38 @@
     ::-webkit-scrollbar-thumb:hover {
       background: linear-gradient(90deg, #6b21a8, #db2777);
     }
+    /* Hidden audio element */
+    #background-audio {
+      display: none;
+    }
+    /* Gradient outline text for VIP methods */
+    .vip-method {
+      -webkit-text-stroke: 1px transparent;
+      background: linear-gradient(45deg, #7e22ce, #ec4899, #7e22ce);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-stroke-color: transparent;
+      color: transparent;
+      animation: gradientFlow 3s ease infinite;
+    }
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    /* Ensure [VIP] label remains purple */
+    .vip-method .vip-label {
+      color: #c084fc;
+      -webkit-text-stroke: 0;
+      background: none;
+      animation: none;
+    }
   </style>
 </head>
 <body>
   <!-- Audio Element -->
-  <audio id="background-music" loop autoplay>
-    <source src="https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPOSITORY/main/audio/background_music.mp3" type="audio/mpeg">
+  <audio id="background-audio" loop autoplay>
+    <source src="background_music.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
   <!-- Audio Control -->
@@ -460,25 +486,25 @@
             <h3 class="text-xl font-semibold mb-4 text-white">Layer 4</h3>
             <ul class="text-sm text-gray-300 text-left space-y-2">
               <li>UDP</li>
-              <li>UDPBYPASS <span class="text-purple-500">[VIP]</span></li>
+              <li class="vip-method">UDPBYPASS <span class="vip-label">[VIP]</span></li>
               <li>UDP-GAME</li>
               <li>TCP</li>
-              <li>TCPBYPASS <span class="text-purple-500">[VIP]</span></li>
+              <li class="vip-method">TCPBYPASS <span class="vip-label">[VIP]</span></li>
               <li>TCP-GAME</li>
-              <li>SSH <span class="text-purple-500">[VIP]</span></li>
-              <li>OVH <span class="text-purple-500">[VIP]</span></li>
+              <li class="vip-method">SSH <span class="vip-label">[VIP]</span></li>
+              <li class="vip-method">OVH <span class="vip-label">[VIP]</span></li>
               <li>DNS</li>
               <li>NTP</li>
-              <li>DISCORD <span class="text-purple-500">[VIP]</span></li>
-              <li>HOMEHOLDER <span class="text-purple-500">[VIP]</span></li>
+              <li class="vip-method">DISCORD <span class="vip-label">[VIP]</span></li>
+              <li class="vip-method">HOMEHOLDER <span class="vip-label">[VIP]</span></li>
             </ul>
           </div>
           <!-- Layer 7 -->
           <div class="card p-6 rounded-lg">
             <h3 class="text-xl font-semibold mb-4 text-white">Layer 7</h3>
             <ul class="text-sm text-gray-300 text-left space-y-2">
-              <li>BROWSER <span class="text-purple-500">[VIP]</span></li>
-              <li>CLOUDFLARE <span class="text-purple-500">[VIP]</span></li>
+              <li class="vip-method">BROWSER <span class="vip-label">[VIP]</span></li>
+              <li class="vip-method">CLOUDFLARE <span class="vip-label">[VIP]</span></li>
               <li>HTTPS</li>
               <li>HTTP</li>
               <li>TLS</li>
@@ -688,7 +714,7 @@
     // Fallback timeout to ensure content displays
     setTimeout(showContent, 1500);
 
-    // Check external resources (TailwindCSS, Imgur, YouTube, Audio)
+    // Check external resources (TailwindCSS, Imgur, YouTube)
     window.addEventListener('load', () => {
       const tailwindScript = document.querySelector('script[src="https://cdn.tailwindcss.com"]');
       if (!tailwindScript || tailwindScript.complete || tailwindScript.readyState === 'loaded') {
@@ -709,10 +735,9 @@
       testIframe.onerror = () => console.warn('Failed to load YouTube iframe');
 
       // Test audio resource
-      const testAudio = new Audio('https://raw.githubusercontent.com/getdashix/dashix/main/yes.mp3');
-      testAudio.load();
-      testAudio.oncanplay = () => console.log('Audio file loaded successfully');
-      testAudio.onerror = () => console.warn('Failed to load audio file');
+      const audio = document.getElementById('background-audio');
+      audio.oncanplay = () => console.log('Audio file loaded successfully');
+      audio.onerror = () => console.warn('Failed to load audio file');
     });
 
     // Copy to clipboard function
@@ -726,9 +751,9 @@
 
     // Toggle audio playback
     function toggleAudio() {
-      const audio = document.getElementById('background-music');
+      const audio = document.getElementById('background-audio');
       if (audio.paused) {
-        audio.play().catch(err => console.error('Audio playback failed: ', err));
+        audio.play().catch(err => console.error('Failed to play audio: ', err));
       } else {
         audio.pause();
       }
@@ -736,4 +761,3 @@
   </script>
 </body>
 </html>
-
