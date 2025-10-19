@@ -108,9 +108,72 @@
     .dropdown-menu a:hover {
       background: linear-gradient(90deg, #6b21a8, #db2777);
     }
+    /* Accordion styling */
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    .accordion-toggle:checked + .accordion-label + .accordion-content {
+      max-height: 1000px; /* Adjust as needed for content */
+    }
+    .accordion-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .accordion-label:hover {
+      background: rgba(107, 33, 168, 0.1);
+    }
+    .accordion-toggle {
+      display: none;
+    }
+    .accordion-icon {
+      transition: transform 0.3s ease;
+    }
+    .accordion-toggle:checked + .accordion-label .accordion-icon {
+      transform: rotate(180deg);
+    }
+    /* Audio control styling */
+    .audio-control {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 30;
+      background: linear-gradient(135deg, #1e293b 0%, #111827 100%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 8px;
+    }
+    .audio-control button {
+      background: linear-gradient(90deg, #7e22ce, #ec4899);
+      color: #e5e7eb;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: background 0.3s ease;
+    }
+    .audio-control button:hover {
+      background: linear-gradient(90deg, #6b21a8, #db2777);
+    }
   </style>
 </head>
 <body>
+  <!-- Audio Element -->
+  <audio id="background-music" loop autoplay>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    <source src="https://www.soundhelix.com/examples/ogg/SoundHelix-Song-1.ogg" type="audio/ogg">
+    Your browser does not support the audio element.
+  </audio>
+  <!-- Audio Control -->
+  <div class="audio-control">
+    <button onclick="toggleAudio()">Toggle Audio</button>
+  </div>
+
   <!-- Loading Screen -->
   <div id="loader">
     <h1 class="text-4xl font-extrabold gradient-text mb-6">DashixC2</h1>
@@ -485,34 +548,110 @@
     <section id="terms" class="py-20">
       <div class="container mx-auto px-6 text-center">
         <h2 class="text-4xl font-bold gradient-text mb-6">Terms of Service</h2>
-        <div class="card p-8 rounded-lg max-w-3xl mx-auto text-left text-gray-300">
-          <xaiArtifact artifact_id="390f6465-ac9d-4b19-a4f3-c8cd1c9b9535" artifact_version_id="68b77836-6f10-4433-9aaf-a53d3fce96fa" title="terms_of_service.md" contentType="text/markdown">
-# Terms of Service
+        <p class="text-lg text-gray-300 mb-12 max-w-xl mx-auto">Review our terms to understand the guidelines for using DashixC2.</p>
+        <div class="max-w-3xl mx-auto space-y-4">
+          <!-- Acceptance of Terms -->
+          <div class="card rounded-lg">
+            <input type="checkbox" id="accordion-1" class="accordion-toggle">
+            <label for="accordion-1" class="accordion-label p-6 text-left">
+              <h3 class="text-xl font-semibold text-white">1. Acceptance of Terms</h3>
+              <svg class="w-5 h-5 text-purple-500 accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </label>
+            <div class="accordion-content p-6 pt-0 text-left">
+              <p class="text-sm text-gray-300">By accessing or using DashixC2, you agree to be bound by these Terms of Service ("Terms"). If you do not agree, you may not use our services.</p>
+            </div>
+          </div>
+          <!-- Use of Services -->
+          <div class="card rounded-lg">
+            <input type="checkbox" id="accordion-2" class="accordion-toggle">
+            <label for="accordion-2" class="accordion-label p-6 text-left">
+              <h3 class="text-xl font-semibold text-white">2. Use of Services</h3>
+              <svg class="w-5 h-5 text-purple-500 accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </label>
+            <div class="accordion-content p-6 pt-0 text-left">
+              <p class="text-sm text-gray-300">You agree to use DashixC2 only for lawful purposes and in accordance with these Terms. You are prohibited from:
+              <ul class="list-disc list-inside mt-2 space-y-1">
+                <li>Using the service to engage in any illegal activity.</li>
+                <li>Attempting to gain unauthorized access to our systems or networks.</li>
+                <li>Interfering with the operation of the service.</li>
+              </ul></p>
+            </div>
+          </div>
+          <!-- Account Responsibility -->
+          <div class="card rounded-lg">
+            <input type="checkbox" id="accordion-3" class="accordion-toggle">
+            <label for="accordion-3" class="accordion-label p-6 text-left">
+              <h3 class="text-xl font-semibold text-white">3. Account Responsibility</h3>
+              <svg class="w-5 h-5 text-purple-500 accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </label>
+            <div class="accordion-content p-6 pt-0 text-left">
+              <p class="text-sm text-gray-300">You are responsible for maintaining the confidentiality of your account credentials. Any activity under your account is your responsibility.</p>
+            </div>
+          </div>
+          <!-- Termination -->
+          <div class="card rounded-lg">
+            <input type="checkbox" id="accordion-4" class="accordion-toggle">
+            <label for="accordion-4" class="accordion-label p-6 text-left">
+              <h3 class="text-xl font-semibold text-white">4. Termination</h3>
+              <svg class="w-5 h-5 text-purple-500 accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </label>
+            <div class="accordion-content p-6 pt-0 text-left">
+              <p class="text-sm text-gray-300">We reserve the right to terminate or suspend your access to DashixC2 at our discretion, without notice, for conduct that violates these Terms.</p>
+            </div>
+          </div>
+          <!-- Limitation of Liability -->
+          <div class="card rounded-lg">
+            <input type="checkbox" id="accordion-5" class="accordion-toggle">
+            <label for="accordion-5" class="accordion-label p-6 text-left">
+              <h3 class="text-xl font-semibold text-white">5. Limitation of Liability</h3>
+              <svg class="w-5 h-5 text-purple-500 accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </label>
+            <div class="accordion-content p-6 pt-0 text-left">
+              <p class="text-sm text-gray-300">DashixC2 is provided "as is" without warranties of any kind. We are not liable for any damages arising from your use of the service.</p>
+            </div>
+          </div>
+          <!-- Modifications to Terms -->
+          <div class="card rounded-lg">
+            <input type="checkbox" id="accordion-6" class="accordion-toggle">
+            <label for="accordion-6" class="accordion-label p-6 text-left">
+              <h3 class="text-xl font-semibold text-white">6. Modifications to Terms</h3>
+              <svg class="w-5 h-5 text-purple-500 accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </label>
+            <div class="accordion-content p-6 pt-0 text-left">
+              <p class="text-sm text-gray-300">We may update these Terms at any time. Continued use of the service after changes constitutes your acceptance of the new Terms.</p>
+            </div>
+          </div>
+          <!-- Contact -->
+          <div class="card rounded-lg">
+            <input type="checkbox" id="accordion-7" class="accordion-toggle">
+            <label for="accordion-7" class="accordion-label p-6 text-left">
+              <h3 class="text-xl font-semibold text-white">7. Contact</h3>
+              <svg class="w-5 h-5 text-purple-500 accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </label>
+            <div class="accordion-content p-6 pt-0 text-left">
+              <p class="text-sm text-gray-300">For questions about these Terms, please contact us via the <a href="#contact" class="gradient-text hover:underline">Contact section</a>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 
-## 1. Acceptance of Terms
-By accessing or using DashixC2, you agree to be bound by these Terms of Service ("Terms"). If you do not agree, you may not use our services.
-
-## 2. Use of Services
-You agree to use DashixC2 only for lawful purposes and in accordance with these Terms. You are prohibited from:
-- Using the service to engage in any illegal activity.
-- Attempting to gain unauthorized access to our systems or networks.
-- Interfering with the operation of the service.
-
-## 3. Account Responsibility
-You are responsible for maintaining the confidentiality of your account credentials. Any activity under your account is your responsibility.
-
-## 4. Termination
-We reserve the right to terminate or suspend your access to DashixC2 at our discretion, without notice, for conduct that violates these Terms.
-
-## 5. Limitation of Liability
-DashixC2 is provided "as is" without warranties of any kind. We are not liable for any damages arising from your use of the service.
-
-## 6. Modifications to Terms
-We may update these Terms at any time. Continued use of the service after changes constitutes your acceptance of the new Terms.
-
-## 7. Contact
-For questions about these Terms, please contact us via the Contact section.
-              <script>
+  <script>
     // Function to hide loader and show content
     function showContent() {
       const loader = document.getElementById('loader');
@@ -535,7 +674,7 @@ For questions about these Terms, please contact us via the Contact section.
     // Fallback timeout to ensure content displays
     setTimeout(showContent, 1500);
 
-    // Check external resources (TailwindCSS, Imgur, YouTube)
+    // Check external resources (TailwindCSS, Imgur, YouTube, Audio)
     window.addEventListener('load', () => {
       const tailwindScript = document.querySelector('script[src="https://cdn.tailwindcss.com"]');
       if (!tailwindScript || tailwindScript.complete || tailwindScript.readyState === 'loaded') {
@@ -554,6 +693,12 @@ For questions about these Terms, please contact us via the Contact section.
       testIframe.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ';
       testIframe.onload = () => console.log('YouTube iframe loaded successfully');
       testIframe.onerror = () => console.warn('Failed to load YouTube iframe');
+
+      // Test audio resource
+      const testAudio = new Audio('https://jumpshare.com/s/I9Xf4i2cDVgvKPBvn6GT');
+      testAudio.load();
+      testAudio.oncanplay = () => console.log('Audio file loaded successfully');
+      testAudio.onerror = () => console.warn('Failed to load audio file');
     });
 
     // Copy to clipboard function
@@ -564,7 +709,16 @@ For questions about these Terms, please contact us via the Contact section.
         console.error('Failed to copy: ', err);
       });
     }
+
+    // Toggle audio playback
+    function toggleAudio() {
+      const audio = document.getElementById('background-music');
+      if (audio.paused) {
+        audio.play().catch(err => console.error('Audio playback failed: ', err));
+      } else {
+        audio.pause();
+      }
+    }
   </script>
 </body>
 </html>
-</xaiArtifact>
