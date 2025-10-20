@@ -179,8 +179,8 @@
     #background-audio {
       display: none;
     }
-    /* Gradient outline text for VIP methods */
-    .vip-method {
+    /* Gradient outline text for VIP and custom methods */
+    .vip-method, .custom-method {
       -webkit-text-stroke: 1px transparent;
       background: linear-gradient(45deg, #7e22ce, #ec4899, #7e22ce);
       background-size: 200% 200%;
@@ -194,8 +194,8 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-    /* Ensure [VIP] label remains purple */
-    .vip-method .vip-label {
+    /* Ensure [VIP] and [CUSTOM] labels remain purple */
+    .vip-method .vip-label, .custom-method .custom-label {
       color: #c084fc;
       -webkit-text-stroke: 0;
       background: none;
@@ -241,6 +241,7 @@
               </svg>
             </button>
             <div class="dropdown-menu">
+              <a href="#news" class="hover:text-purple-400 transition">News</a>
               <a href="#terms" class="hover:text-purple-400 transition">Terms of Service</a>
             </div>
           </div>
@@ -528,7 +529,7 @@
           <div class="card p-6 rounded-lg">
             <h3 class="text-xl font-semibold mb-4 text-white">Custom</h3>
             <ul class="text-sm text-gray-300 text-left space-y-2">
-              <li>Coming Soon</li>
+              <li class="custom-method">DASHIXRAW <span class="custom-label">[CUSTOM]</span></li>
               <li>Coming Soon</li>
               <li>Coming Soon</li>
             </ul>
@@ -564,6 +565,55 @@
               <label class="block text-left text-xs text-gray-300 mb-1">Password</label>
               <input type="text" value="Tester" class="input-field w-full p-2 text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" readonly>
               <button onclick="copyToClipboard('tester')" class="copy-button text-white px-3 py-1 mt-1 text-sm rounded-full font-semibold hover:shadow-lg">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- News Section (Changelog) -->
+    <section id="news" class="py-20">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-4xl font-bold gradient-text mb-6">News & Changelog</h2>
+        <p class="text-lg text-gray-300 mb-12 max-w-xl mx-auto">Stay updated with the latest DashixC2 features, improvements, and announcements.</p>
+        <div class="max-w-3xl mx-auto space-y-4">
+          <!-- Changelog Entry 1 -->
+          <div class="card rounded-lg">
+            <input type="checkbox" id="changelog-1" class="accordion-toggle">
+            <label for="changelog-1" class="accordion-label p-6 text-left">
+              <h3 class="text-xl font-semibold text-white">Version 2.1.0 - October 15, 2025</h3>
+              <svg class="w-5 h-5 text-purple-500 accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </label>
+            <div class="accordion-content p-6 pt-0 text-left">
+              <p class="text-sm text-gray-300">Added new DASHIXRAW method under Custom category. Improved performance for Layer 7 methods, including BROWSER and CLOUDFLARE. Fixed bugs in API integration.</p>
+            </div>
+          </div>
+          <!-- Changelog Entry 2 -->
+          <div class="card rounded-lg">
+            <input type="checkbox" id="changelog-2" class="accordion-toggle">
+            <label for="changelog-2" class="accordion-label p-6 text-left">
+              <h3 class="text-xl font-semibold text-white">Version 2.0.0 - September 10, 2025</h3>
+              <svg class="w-5 h-5 text-purple-500 accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </label>
+            <div class="accordion-content p-6 pt-0 text-left">
+              <p class="text-sm text-gray-300">Introduced VIP methods for Layer 4, including UDPBYPASS and TCPBYPASS. Enhanced UI with gradient animations and improved mobile responsiveness.</p>
+            </div>
+          </div>
+          <!-- Changelog Entry 3 -->
+          <div class="card rounded-lg">
+            <input type="checkbox" id="changelog-3" class="accordion-toggle">
+            <label for="changelog-3" class="accordion-label p-6 text-left">
+              <h3 class="text-xl font-semibold text-white">Version 1.9.5 - August 5, 2025</h3>
+              <svg class="w-5 h-5 text-purple-500 accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </label>
+            <div class="accordion-content p-6 pt-0 text-left">
+              <p class="text-sm text-gray-300">Optimized server performance for RAW methods. Added support for new test account system with 5-day refresh cycle.</p>
             </div>
           </div>
         </div>
@@ -775,5 +825,3 @@
   </script>
 </body>
 </html>
-
-
