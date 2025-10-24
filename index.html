@@ -150,7 +150,7 @@
     .accordion-toggle {
       display: none;
     }
-    .accordion-icon {
+    .accordion'icon {
       transition: transform 0.3s ease;
     }
     .accordion-toggle:checked + .accordion-label .accordion-icon {
@@ -264,8 +264,18 @@
       </div>
     </nav>
 
+    <!-- Notice Section -->
+    <section id="notice" class="pt-20 pb-8 text-center">
+      <div class="container mx-auto px-6">
+        <div class="card p-6 rounded-lg max-w-3xl mx-auto border-2 border-red-500">
+          <h3 class="text-2xl font-bold gradient-outline-text mb-4">Important Notice</h3>
+          <p class="text-lg text-gray-300">Our API provider power is currently low. We are working throughout this week to secure new providers. Expected network upgrade for Layer 4 on November 3rd, 2025. <span class="gradient-text font-semibold">DASHIXRAW Custom method is fully operational!</span></p>
+        </div>
+      </div>
+    </section>
+
     <!-- Hero Section -->
-    <section id="home" class="pt-28 pb-20 text-center">
+    <section id="home" class="py-20 text-center">
       <div class="container mx-auto px-6">
         <h2 class="text-5xl font-extrabold gradient-text mb-6">DashixC2</h2>
         <p class="text-lg text-gray-300 max-w-2xl mx-auto mb-8">Advanced Command & Control panel for seamless network operations.</p>
@@ -349,7 +359,9 @@
               <p class="text-3xl font-extrabold gradient-text mb-6">$7.60<span class="text-lg text-gray-400">/8 Days</span></p>
               <ul class="text-sm text-gray-300 text-left mb-8 space-y-3">
                 <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Time: 60 sec</li>
-                <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Cons: 1</li>
+                <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011
+
+System: .414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Cons: 1</li>
                 <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Cooldown: 60 sec</li>
               </ul>
               <a href="https://discord.gg/dashix" class="gradient-button text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg">Buy Test</a>
@@ -368,7 +380,7 @@
               <ul class="text-sm text-gray-300 text-left mb-8 space-y-3">
                 <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Time: 210 sec</li>
                 <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Cons: 2</li>
-                <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Cooldown: 45 sec</li>
+                <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Cooldown: 2 min</li>
               </ul>
               <a href="https://discord.gg/dashix" class="gradient-button text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg">Buy Bronze</a>
             </div>
@@ -842,5 +854,3 @@
   </script>
 </body>
 </html>
-
-
