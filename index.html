@@ -150,7 +150,7 @@
     .accordion-toggle {
       display: none;
     }
-    .accordion'icon {
+    .accordion-icon {
       transition: transform 0.3s ease;
     }
     .accordion-toggle:checked + .accordion-label .accordion-icon {
@@ -226,6 +226,10 @@
   </audio>
   <!-- Audio Control -->
   <div class="audio-control">
+    <div class="mb-2">
+      <label for="volume-slider" class="block text-xs text-gray-300 mb-1">Volume</label>
+      <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer" style="background: linear-gradient(90deg, #7e22ce, #ec4899);">
+    </div>
     <button onclick="toggleAudio()">Toggle Audio</button>
   </div>
 
@@ -359,9 +363,7 @@
               <p class="text-3xl font-extrabold gradient-text mb-6">$7.60<span class="text-lg text-gray-400">/8 Days</span></p>
               <ul class="text-sm text-gray-300 text-left mb-8 space-y-3">
                 <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Time: 60 sec</li>
-                <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011
-
-System: .414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Cons: 1</li>
+                <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Cons: 1</li>
                 <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Cooldown: 60 sec</li>
               </ul>
               <a href="https://discord.gg/dashix" class="gradient-button text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg">Buy Test</a>
@@ -560,7 +562,9 @@ System: .414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/><
             <h3 class="text-xl font-semibold mb-4 text-white">Custom</h3>
             <ul class="text-sm text-gray-300 text-left space-y-2">
               <li class="custom-method">DASHIXRAW <span class="custom-label">[CUSTOM]</span></li>
-              <li>Coming Soon</li>
+              <li>
+
+System: Coming Soon</li>
               <li>Coming Soon</li>
             </ul>
           </div>
@@ -851,14 +855,12 @@ System: .414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/><
         audio.pause();
       }
     }
+
+    // Volume control
+    document.getElementById('volume-slider').addEventListener('input', function() {
+      const audio = document.getElementById('background-audio');
+      audio.volume = this.value;
+    });
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
