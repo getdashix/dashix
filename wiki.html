@@ -1,1 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DashixC2 Wiki - Comprehensive guide to the DashixC2 Command & Control platform, including method details, attack usage, PuTTY login guide, plans, and changelog.">
+  <title>DashixC2 Wiki</title>
+  <link rel="icon" type="image/png" href="https://i.imgur.com/94S3B5R.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom styles matching the website theme */
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #1e293b 0%, #111827 100%);
+      color: #e5e7eb;
+      scroll-behavior: smooth;
+    }
+    .gradient-text {
+      background: linear-gradient(90deg, #7e22ce, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gradient-outline-text {
+      -webkit-text-stroke: 1px transparent;
+      background: linear-gradient(45deg, #7e22ce, #ec4899, #7e22ce);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-stroke-color: transparent;
+      color: transparent;
+      animation: gradientFlow 2s ease infinite;
+      font-weight: bold;
+      font-size: 1.5rem;
+      text-shadow: 0 0 8px rgba(126, 34, 206, 0.8), 0 0 12px rgba(236, 72, 153, 0.8), 0 0 16px rgba(126, 34, 206, 0.6);
+    }
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .card {
+      background: linear-gradient(135deg, #1e293b 0%, #111827 100%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 20px rgba(107, 33, 168, 0.2);
+    }
+    .gradient-button {
+      background: linear-gradient(90deg, #7e22ce, #ec4899);
+      transition: background 0.3s ease;
+    }
+    .gradient-button:hover {
+      background: linear-gradient(90deg, #6b21a8, #db2777);
+    }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    .accordion-toggle:checked + .accordion-label + .accordion-content {
+      max-height: 1000px;
+    }
+    .accordion-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .accordion-label:hover {
+      background: rgba(107, 33, 168, 0.1);
+    }
+    .accordion-toggle {
+      display: none;
+    }
+    .accordion-icon {
+      transition: transform 0.3s ease;
+    }
+    .accordion-toggle:checked + .accordion-label .accordion-icon {
+      transform: rotate(180deg);
+    }
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1e293b;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(90deg, #7e22ce, #ec4899);
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(90deg, #6b21a8, #db2777);
+    }
+    .vip-method, .custom-method {
+      -webkit-text-stroke: 1px transparent;
+      background: linear-gradient(45deg, #7e22ce, #ec4899, #7e22ce);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-stroke-color: transparent;
+      color: transparent;
+      animation: gradientFlow 3s ease infinite;
+    }
+    .vip-method .vip-label, .custom-method .custom-label {
+      color: #c084fc;
+      -webkit-text-stroke: 0;
+      background: none;
+      animation: none;
+    }
+    .code-block {
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 16px;
+      font-family: 'Courier New', Courier, monospace;
+      color: #e5e7eb;
+      white-space: pre-wrap;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="fixed w-full top-0 z-10 card">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold gradient-text">DashixC2 Wiki</h1>
+      <div class="space-x-8 text-sm flex items-center">
+        <a href="#overview" class="hover:text-purple-400 transition text-gray-300">Overview</a>
+        <a href="#login-guide" class="hover:text-purple-400 transition text-gray-300">Login Guide</a>
+        <a href="#attack-guide" class="hover:text-purple-400 transition text-gray-300">Attack Guide</a>
+        <a href="#methods" class="hover:text-purple-400 transition text-gray-300">Methods</a>
+        <a href="#plans" class="hover:text-purple-400 transition text-gray-300">Plans</a>
+        <a href="#test-account" class="hover:text-purple-400 transition text-gray-300">Test Account</a>
+        <a href="#changelog" class="hover:text-purple-400 transition text-gray-300">Changelog</a>
+        <a href="https://discord.gg/dashix" class="gradient-button text-white px-4 py-2 rounded-full font-semibold hover:shadow-lg">Join Discord</a>
+      </div>
+    </div>
+  </nav>
 
+  <!-- Overview Section -->
+  <section id="overview" class="pt-20 py-20 text-center">
+    <div class="container mx-auto px-6">
+      <h2 class="text-5xl font-extrabold gradient-text mb-6">DashixC2 Wiki</h2>
+      <p class="text-lg text-gray-300 max-w-2xl mx-auto mb-8">Your ultimate guide to mastering DashixC2, the advanced Command & Control platform for seamless network operations.</p>
+      <div class="card p-8 rounded-lg max-w-3xl mx-auto">
+        <p class="text-lg text-gray-300 mb-6">DashixC2 is a state-of-the-art Command & Control (C2) panel designed for network operators seeking powerful tools to manage and optimize their networks. With a suite of Layer 4, Layer 7, Raw, and Custom methods, flexible pricing plans, and robust API partnerships, DashixC2 empowers users to achieve unparalleled performance in network operations.</p>
+        <a href="https://discord.gg/dashix" class="inline-block gradient-button text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg transition">Join Our Community</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Login Guide Section -->
+  <section id="login-guide" class="py-20">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold gradient-text mb-6">How to Log In to DashixC2 with PuTTY</h2>
+      <p class="text-lg text-gray-300 mb-12 max-w-xl mx-auto">Follow this step-by-step guide to access the DashixC2 panel using PuTTY, a free SSH client.</p>
+      <div class="card p-8 rounded-lg max-w-3xl mx-auto text-left">
+        <h3 class="text-2xl font-semibold text-white mb-4">Step-by-Step Guide</h3>
+        <ol class="text-sm text-gray-300 space-y-4 list-decimal list-inside">
+          <li><strong>Download PuTTY</strong>: Visit the official PuTTY website (<a href="https://www.putty.org" class="gradient-text hover:underline">putty.org</a>) and download the latest version of PuTTY for your operating system (Windows, macOS, or Linux).</li>
+          <li><strong>Install PuTTY</strong>: Run the installer and follow the on-screen instructions to install PuTTY on your device.</li>
+          <li><strong>Open PuTTY</strong>: Launch PuTTY from your applications menu or desktop shortcut.</li>
+          <li><strong>Configure Connection</strong>:
+            <ul class="list-disc list-inside ml-4 mt-2">
+              <li>In the "Host Name (or IP address)" field, enter <code>15.204.18.207</code>.</li>
+              <li>In the "Port" field, enter <code>316</code>.</li>
+              <li>Ensure the "Connection type" is set to <strong>SSH</strong>.</li>
+            </ul>
+          </li>
+          <li><strong>Save Session (Optional)</strong>: In the "Saved Sessions" field, type a name (e.g., "DashixC2") and click "Save" to store the configuration for future use.</li>
+          <li><strong>Connect to DashixC2</strong>: Click "Open" to initiate the SSH connection. If prompted with a security alert, click "Yes" to trust the host.</li>
+          <li><strong>Log In</strong>:
+            <ul class="list-disc list-inside ml-4 mt-2">
+              <li>At the login prompt, enter the username: <code>tester</code>.</li>
+              <li>Press Enter, then enter the password: <code>Tester</code> (note that the password may not display as you type).</li>
+            </ul>
+          </li>
+          <li><strong>Access the Panel</strong>: Once logged in, you’ll see the DashixC2 command-line interface. Type <code>help</code> to view available commands and start exploring the panel.</li>
+        </ol>
+        <p class="text-sm text-gray-300 mt-6">Note: For test accounts, credentials refresh every 5 days. Paid accounts receive unique credentials upon purchase. Contact support via <a href="https://discord.gg/dashix" class="gradient-text hover:underline">Discord</a> for assistance.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Attack Guide Section -->
+  <section id="attack-guide" class="py-20">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold gradient-text mb-6">Using the Attack Feature</h2>
+      <p class="text-lg text-gray-300 mb-12 max-w-xl mx-auto">Learn how to launch attacks using DashixC2 with the command format: <code>Method ip port time</code>.</p>
+      <div class="card p-8 rounded-lg max-w-3xl mx-auto text-left">
+        <h3 class="text-2xl font-semibold text-white mb-4">Attack Command Format</h3>
+        <p class="text-sm text-gray-300 mb-4">To initiate an attack in the DashixC2 panel, use the following command structure in the command-line interface:</p>
+        <div class="code-block mb-6">
+          <code>Method ip port time</code>
+        </div>
+        <ul class="text-sm text-gray-300 space-y-2 list-disc list-inside">
+          <li><strong>Method</strong>: The attack method (e.g., UDP, TCPBYPASS, DASHIXRAW). Refer to the Methods section for details.</li>
+          <li><strong>ip</strong>: The target IP address (e.g., 192.168.1.1).</li>
+          <li><strong>port</strong>: The target port (e.g., 80 for HTTP, 25565 for Minecraft). Use 0 for methods that don’t require a specific port.</li>
+          <li><strong>time</strong>: Duration of the attack in seconds (e.g., 60). Limited by your plan (e.g., 60s for Trial, 450s for Platinum).</li>
+        </ul>
+        <h3 class="text-2xl font-semibold text-white mt-6 mb-4">Example Commands</h3>
+        <div class="code-block mb-4">
+          <code>UDP 192.168.1.1 0 60</code>
+          <p class="text-xs text-gray-400 mt-2">Launches a 60-second UDP flood against 192.168.1.1.</p>
+        </div>
+        <div class="code-block mb-4">
+          <code>TCPBYPASS 10.0.0.1 80 300</code>
+          <p class="text-xs text-gray-400 mt-2">Initiates a 300-second TCPBYPASS attack on port 80 of 10.0.0.1 (VIP only).</p>
+        </div>
+        <div class="code-block mb-4">
+          <code>DASHIXRAW 172.16.0.1 0 450</code>
+          <p class="text-xs text-gray-400 mt-2">Executes a 450-second DASHIXRAW attack on 172.16.0.1 (Custom, Platinum plan recommended).</p>
+        </div>
+        <h3 class="text-2xl font-semibold text-white mt-6 mb-4">Tips for Success</h3>
+        <ul class="text-sm text-gray-300 space-y-2 list-disc list-inside">
+          <li>Ensure your plan supports the method (e.g., VIP methods require Bronze or higher).</li>
+          <li>Respect cooldown periods (e.g., 60s for Trial, 0s for Platinum).</li>
+          <li>Use <code>help</code> in the panel to list available methods and verify your plan’s limits.</li>
+          <li>Contact <a href="https://discord.gg/dashix" class="gradient-text hover:underline">Discord support</a> for issues or to upgrade your plan.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Methods Section -->
+  <section id="methods" class="py-20">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold gradient-text mb-6">Methods</h2>
+      <p class="text-lg text-gray-300 mb-12 max-w-xl mx-auto">DashixC2 offers a powerful suite of Layer 4, Layer 7, Raw, and Custom methods for network stress testing and operations.</p>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+        <!-- Layer 4 -->
+        <div class="card p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-4 text-white">Layer 4</h3>
+          <ul class="text-sm text-gray-300 text-left space-y-3">
+            <li><strong>UDP</strong>: Floods the target with UDP packets, overwhelming network resources. Ideal for general stress testing.<br><code>UDP ip 0 time</code></li>
+            <li class="vip-method"><strong>UDPBYPASS</strong> <span class="vip-label">[VIP]</span>: Bypasses common UDP protections, targeting advanced network setups.<br><code>UDPBYPASS ip 0 time</code></li>
+            <li><strong>UDP-GAME</strong>: Optimized for gaming servers, targeting ports like 27015 or 25565.<br><code>UDP-GAME ip port time</code></li>
+            <li><strong>TCP</strong>: Sends TCP packets to disrupt network connections, compatible with most targets.<br><code>TCP ip port time</code></li>
+            <li class="vip-method"><strong>TCPBYPASS</strong> <span class="vip-label">[VIP]</span>: Circumvents TCP-based protections for enhanced impact.<br><code>TCPBYPASS ip port time</code></li>
+            <li><strong>TCP-GAME</strong>: Tailored for gaming server ports, maximizing disruption.<br><code>TCP-GAME ip port time</code></li>
+            <li class="vip-method"><strong>SSH</strong> <span class="vip-label">[VIP]</span>: Targets SSH services (port 22) with high-intensity flooding.<br><code>SSH ip 22 time</code></li>
+            <li class="vip-method"><strong>OVH</strong> <span class="vip-label">[VIP]</span>: Bypasses OVH hosting protections, ideal for OVH-hosted targets.<br><code>OVH ip port time</code></li>
+            <li><strong>DNS</strong>: Amplifies DNS queries to overload name servers.<br><code>DNS ip 53 time</code></li>
+            <li><strong>NTP</strong>: Uses NTP amplification for high-volume attacks.<br><code>NTP ip 123 time</code></li>
+            <li class="vip-method"><strong>DISCORD</strong> <span class="vip-label">[VIP]</span>: Targets Discord infrastructure, focusing on voice or API endpoints.<br><code>DISCORD ip port time</code></li>
+            <li class="vip-method"><strong>HOMEHOLDER</strong> <span class="vip-label">[VIP]</span>: Attacks residential network endpoints with precision.<br><code>HOMEHOLDER ip port time</code></li>
+          </ul>
+        </div>
+        <!-- Layer 7 -->
+        <div class="card p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-4 text-white">Layer 7</h3>
+          <ul class="text-sm text-gray-300 text-left space-y-3">
+            <li class="vip-method"><strong>BROWSER</strong> <span class="vip-label">[VIP]</span>: Simulates browser-based HTTP requests to overwhelm web servers.<br><code>BROWSER ip 80 time</code></li>
+            <li class="vip-method"><strong>CLOUDFLARE</strong> <span class="vip-label">[VIP]</span>: Bypasses Cloudflare protections, targeting web applications.<br><code>CLOUDFLARE ip 80 time</code></li>
+            <li><strong>HTTPS</strong>: Floods HTTPS services (port 443) with encrypted requests.<br><code>HTTPS ip 443 time</code></li>
+            <li><strong>HTTP</strong>: Sends high-volume HTTP requests to overload web servers.<br><code>HTTP ip 80 time</code></li>
+            <li><strong>TLS</strong>: Disrupts TLS handshakes, targeting secure connections.<br><code>TLS ip 443 time</code></li>
+          </ul>
+        </div>
+        <!-- Raw -->
+        <div class="card p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-4 text-white">Raw</h3>
+          <ul class="text-sm text-gray-300 text-left space-y-3">
+            <li><strong>!UDP</strong> <span class="text-red-500">[RAW]</span>: Raw UDP packet flooding for maximum network saturation.<br><code>!UDP ip 0 time</code></li>
+            <li><strong>!FLUX</strong> <span class="text-red-500">[RAW]</span>: High-intensity flux-based attack for rapid disruption.<br><code>!FLUX ip 0 time</code></li>
+            <li><strong>!TCP-SYN</strong> <span class="text-red-500">[RAW]</span>: Floods with TCP SYN packets to exhaust server resources.<br><code>!TCP-SYN ip port time</code></li>
+            <li><strong>!TCP-ACK</strong> <span class="text-red-500">[RAW]</span>: Sends TCP ACK packets to bypass certain filters.<br><code>!TCP-ACK ip port time</code></li>
+            <li><strong>!GAME</strong> <span class="text-red-500">[RAW]</span>: Raw attack optimized for gaming servers.<br><code>!GAME ip port time</code></li>
+            <li><strong>!STD</strong> <span class="text-red-500">[RAW]</span>: Standard raw packet flooding for versatile use.<br><code>!STD ip 0 time</code></li>
+            <li><strong>!PAKI</strong> <span class="text-red-500">[RAW]</span>: Custom raw method for specialized targets.<br><code>!PAKI ip 0 time</code></li>
+            <li><strong>!NUKE</strong> <span class="text-red-500">[RAW]</span>: Extreme raw flooding for maximum impact.<br><code>!NUKE ip 0 time</code></li>
+          </ul>
+        </div>
+        <!-- Custom -->
+        <div class="card p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-4 text-white">Custom</h3>
+          <ul class="text-sm text-gray-300 text-left space-y-3">
+            <li class="custom-method"><strong>DASHIXRAW</strong> <span class="custom-label">[CUSTOM]</span>: Proprietary high-performance method for advanced network stress testing.<br><code>DASHIXRAW ip 0 time</code></li>
+            <li><strong>Coming Soon</strong>: Additional custom methods are in development for future release.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Plans Section -->
+  <section id="plans" class="py-20">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold gradient-text mb-6">Pricing Plans</h2>
+      <p class="text-lg text-gray-300 mb-12 max-w-xl mx-auto">Choose a plan to unlock DashixC2’s full potential, from trial accounts to premium VIP subscriptions.</p>
+      <div class="mb-16">
+        <h3 class="text-3xl font-bold gradient-text mb-8">Trial Plans</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div class="card p-8 rounded-lg">
+            <h3 class="text-2xl font-bold mb-4 text-white">Test (3 Days)</h3>
+            <p class="text-3xl font-extrabold gradient-text mb-6">$2.85<span class="text-lg text-gray-400">/3 Days</span></p>
+            <ul class="text-sm text-gray-300 text-left mb-8 space-y-3">
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Attack Time: 60 sec</li>
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Concurrent Attacks: 1</li>
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Cooldown: 60 sec</li>
+            </ul>
+            <a href="https://discord.gg/dashix" class="gradient-button text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg">Purchase</a>
+          </div>
+          <div class="card p-8 rounded-lg">
+            <h3 class="text-2xl font-bold mb-4 text-white">Test (8 Days)</h3>
+            <p class="text-3xl font-extrabold gradient-text mb-6">$7.60<span class="text-lg text-gray-400">/8 Days</span></p>
+            <ul class="text-sm text-gray-300 text-left mb-8 space-y-3">
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Attack Time: 60 sec</li>
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Concurrent Attacks: 1</li>
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Cooldown: 60 sec</li>
+            </ul>
+            <a href="https://discord.gg/dashix" class="gradient-button text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg">Purchase</a>
+          </div>
+        </div>
+      </div>
+      <div class="mb-16">
+        <h3 class="text-3xl font-bold gradient-text mb-8">1 Month Plans</h3>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+          <div class="card p-8 rounded-lg">
+            <h3 class="text-2xl font-bold mb-4 text-white">Bronze <span class="text-purple-500">[VIP]</span></h3>
+            <p class="text-3xl font-extrabold gradient-text mb-6">$14.25<span class="text-lg text-gray-400">/1 Month</span></p>
+            <ul class="text-sm text-gray-300 text-left mb-8 space-y-3">
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Attack Time: 210 sec</li>
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Concurrent Attacks: 2</li>
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Cooldown: 2 min</li>
+            </ul>
+            <a href="https://discord.gg/dashix" class="gradient-button text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg">Purchase</a>
+          </div>
+          <div class="card p-8 rounded-lg border-2 border-purple-500">
+            <span class="absolute top-0 left-0 bg-purple-500 text-white text-xs font-semibold px-3 py-1 rounded-br-lg">Most Popular</span>
+            <h3 class="text-2xl font-bold mb-4 text-white">Silver <span class="text-purple-500">[VIP]</span></h3>
+            <p class="text-3xl font-extrabold gradient-text mb-6">$33.25<span class="text-lg text-gray-400">/1 Month</span></p>
+            <ul class="text-sm text-gray-300 text-left mb-8 space-y-3">
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Attack Time: 300 sec</li>
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Concurrent Attacks: 3</li>
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Cooldown: 30 sec</li>
+            </ul>
+            <a href="https://discord.gg/dashix" class="gradient-button text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg">Purchase</a>
+          </div>
+          <div class="card p-8 rounded-lg">
+            <h3 class="text-2xl font-bold mb-4 text-white">Gold <span class="text-purple-500">[VIP]</span></h3>
+            <p class="text-3xl font-extrabold gradient-text mb-6">$71.25<span class="text-lg text-gray-400">/1 Month</span></p>
+            <ul class="text-sm text-gray-300 text-left mb-8 space-y-3">
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Attack Time: 375 sec</li>
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Concurrent Attacks: 4</li>
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Cooldown: 15 sec</li>
+            </ul>
+            <a href="https://discord.gg/dashix" class="gradient-button text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg">Purchase</a>
+          </div>
+          <div class="card p-8 rounded-lg">
+            <h3 class="text-2xl font-bold mb-4 text-white">Platinum <span class="text-purple-500">[VIP]</span></h3>
+            <p class="text-3xl font-extrabold gradient-text mb-6">$190.00<span class="text-lg text-gray-400">/1 Month</span></p>
+            <ul class="text-sm text-gray-300 text-left mb-8 space-y-3">
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Attack Time: 450 sec</li>
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Concurrent Attacks: 5</li>
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Cooldown: 0 sec</li>
+            </ul>
+            <a href="https://discord.gg/dashix" class="gradient-button text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg">Purchase</a>
+          </div>
+        </div>
+      </div>
+      <div class="mb-16">
+        <h3 class="text-3xl font-bold gradient-text mb-8">3 Month Plans</h3>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+          <div class="card p-8 rounded-lg">
+            <h3 class="text-2xl font-bold mb-4 text-white">Bronze <span class="text-purple-500">[VIP]</span></h3>
+            <p class="text-3xl font-extrabold gradient-text mb-6">$38.00<span class="text-lg text-gray-400">/3 Months</span></p>
+            <ul class="text-sm text-gray-300 text-left mb-8 space-y-3">
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Attack Time: 210 sec</li>
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Concurrent Attacks: 2</li>
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Cooldown: 45 sec</li>
+            </ul>
+            <a href="https://discord.gg/dashix" class="gradient-button text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg">Purchase</a>
+          </div>
+          <div class="card p-8 rounded-lg border-2 border-purple-500">
+            <span class="absolute top-0 left-0 bg-purple-500 text-white text-xs font-semibold px-3 py-1 rounded-br-lg">Most Popular</span>
+            <h3 class="text-2xl font-bold mb-4 text-white">Silver <span class="text-purple-500">[VIP]</span></h3>
+            <p class="text-3xl font-extrabold gradient-text mb-6">$90.25<span class="text-lg text-gray-400">/3 Months</span></p>
+            <ul class="text-sm text-gray-300 text-left mb-8 space-y-3">
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Attack Time: 300 sec</li>
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Concurrent Attacks: 3</li>
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Cooldown: 30 sec</li>
+            </ul>
+            <a href="https://discord.gg/dashix" class="gradient-button text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg">Purchase</a>
+          </div>
+          <div class="card p-8 rounded-lg">
+            <h3 class="text-2xl font-bold mb-4 text-white">Gold <span class="text-purple-500">[VIP]</span></h3>
+            <p class="text-3xl font-extrabold gradient-text mb-6">$190.00<span class="text-lg text-gray-400">/3 Months</span></p>
+            <ul class="text-sm text-gray-300 text-left mb-8 space-y-3">
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Attack Time: 375 sec</li>
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Concurrent Attacks: 4</li>
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Cooldown: 15 sec</li>
+            </ul>
+            <a href="https://discord.gg/dashix" class="gradient-button text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg">Purchase</a>
+          </div>
+          <div class="card p-8 rounded-lg">
+            <h3 class="text-2xl font-bold mb-4 text-white">Platinum <span class="text-purple-500">[VIP]</span></h3>
+            <p class="text-3xl font-extrabold gradient-text mb-6">$513.00<span class="text-lg text-gray-400">/3 Months</span></p>
+            <ul class="text-sm text-gray-300 text-left mb-8 space-y-3">
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Attack Time: 450 sec</li>
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Concurrent Attacks: 5</li>
+              <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Cooldown: 0 sec</li>
+            </ul>
+            <a href="https://discord.gg/dashix" class="gradient-button text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg">Purchase</a>
+          </div>
+        </div>
+      </div>
+      <div class="mb-16">
+        <h3 class="text-3xl font-bold gradient-text mb-8">Addons</h3>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+          <div class="card p-6 rounded-lg">
+            <h4 class="text-xl font-semibold mb-4 text-white">Raw Methods</h4>
+            <p class="text-2xl font-extrabold gradient-text mb-6">$28.50<span class="text-lg text-gray-400">/month</span></p>
+            <p class="text-sm text-gray-300 mb-4">Unlocks access to all Raw methods for enhanced attack capabilities.</p>
+            <a href="https://discord.gg/dashix" class="gradient-button text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg">Purchase</a>
+          </div>
+          <div class="card p-6 rounded-lg">
+            <h4 class="text-xl font-semibold mb-4 text-white">No Cooldown</h4>
+            <p class="text-2xl font-extrabold gradient-text mb-6">$14.25<span class="text-lg text-gray-400">/month</span></p>
+            <p class="text-sm text-gray-300 mb-4">Removes cooldown timers for continuous operations.</p>
+            <a href="https://discord.gg/dashix" class="gradient-button text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg">Purchase</a>
+          </div>
+          <div class="card p-6 rounded-lg">
+            <h4 class="text-xl font-semibold mb-4 text-white">Unban</h4>
+            <p class="text-2xl font-extrabold gradient-text mb-6">$42.75</p>
+            <p class="text-sm text-gray-300 mb-4">Restores access for banned accounts.</p>
+            <a href="https://discord.gg/dashix" class="gradient-button text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg">Purchase</a>
+          </div>
+          <div class="card p-6 rounded-lg">
+            <h4 class="text-xl font-semibold mb-4 text-white">API</h4>
+            <p class="text-2xl font-extrabold gradient-text mb-6">$38.00</p>
+            <p class="text-sm text-gray-300 mb-4">Grants access to DashixC2’s API for custom integrations.</p>
+            <a href="https://discord.gg/dashix" class="gradient-button text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg">Purchase</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Test Account Section -->
+  <section id="test-account" class="py-20">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold gradient-text mb-6">Test Account</h2>
+      <p class="text-lg text-gray-300 mb-12 max-w-xl mx-auto">Try DashixC2 with a free test account, refreshed every 5 days. Limited features, no commitment.</p>
+      <div class="max-w-sm mx-auto card p-6 rounded-lg">
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <h4 class="text-sm font-semibold text-gray-300 mb-2">IP Address</h4>
+            <p class="text-sm text-white">15.204.18.207</p>
+          </div>
+          <div>
+            <h4 class="text-sm font-semibold text-gray-300 mb-2">Port</h4>
+            <p class="text-sm text-white">316</p>
+          </div>
+          <div>
+            <h4 class="text-sm font-semibold text-gray-300 mb-2">Username</h4>
+            <p class="text-sm text-white">tester</p>
+          </div>
+          <div>
+            <h4 class="text-sm font-semibold text-gray-300 mb-2">Password</h4>
+            <p class="text-sm text-white">Tester</p>
+          </div>
+        </div>
+        <p class="text-sm text-gray-300 mt-4">Use these credentials in PuTTY to access the test panel. See the <a href="#login-guide" class="gradient-text hover:underline">Login Guide</a> for instructions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Changelog Section -->
+  <section id="changelog" class="py-20">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold gradient-text mb-6">Changelog</h2>
+      <p class="text-lg text-gray-300 mb-12 max-w-xl mx-auto">Track the latest updates and improvements to DashixC2.</p>
+      <div class="max-w-3xl mx-auto space-y-4">
+        <div class="card rounded-lg">
+          <input type="checkbox" id="changelog-1" class="accordion-toggle">
+          <label for="changelog-1" class="accordion-label p-6 text-left">
+            <h3 class="text-xl font-semibold text-white">Version 2.1.0 - October 15, 2025</h3>
+            <svg class="w-5 h-5 text-purple-500 accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </label>
+          <div class="accordion-content p-6 pt-0 text-left">
+            <p class="text-sm text-gray-300">Introduced DASHIXRAW custom method. Enhanced Layer 7 methods (BROWSER, CLOUDFLARE). Fixed API integration bugs.</p>
+          </div>
+        </div>
+        <div class="card rounded-lg">
+          <input type="checkbox" id="changelog-2" class="accordion-toggle">
+          <label for="changelog-2" class="accordion-label p-6 text-left">
+            <h3 class="text-xl font-semibold text-white">Version 2.0.0 - September 10, 2025</h3>
+            <svg class="w-5 h-5 text-purple-500 accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </label>
+          <div class="accordion-content p-6 pt-0 text-left">
+            <p class="text-sm text-gray-300">Added VIP Layer 4 methods (UDPBYPASS, TCPBYPASS). Improved UI with gradient animations and mobile responsiveness.</p>
+          </div>
+        </div>
+        <div class="card rounded-lg">
+          <input type="checkbox" id="changelog-3" class="accordion-toggle">
+          <label for="changelog-3" class="accordion-label p-6 text-left">
+            <h3 class="text-xl font-semibold text-white">Version 1.9.5 - August 5, 2025</h3>
+            <svg class="w-5 h-5 text-purple-500 accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </label>
+          <div class="accordion-content p-6 pt-0 text-left">
+            <p class="text-sm text-gray-300">Optimized RAW method performance. Introduced 5-day test account refresh system.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-10 text-center">
+    <div class="container mx-auto px-6">
+      <p class="text-sm text-gray-300">DashixC2 &copy; 2025. All rights reserved.</p>
+      <p class="text-sm text-gray-300 mt-2">Join our <a href="https://discord.gg/dashix" class="gradient-text hover:underline">Discord</a> for support and updates.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>
